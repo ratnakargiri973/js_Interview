@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+           
+        }
+        .image-container{
+            width: 30rem;
+            height: 20rem;
+            gap: 1rem;
+            border: 2px solid black;
+            position: relative;
+            overflow: hidden;
+        }
+        .img-list{
+            display: flex;
+        overflow-x: auto;
+        transition: transform 0.5s ease;
+        }
+
+        img{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+       }
+       
+       #prev, #next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+#prev {
+    left: 0;
+}
+
+#next {
+    right: 0;
+}
+</style>
+</head>
+<body>
+    <div class="image-container">
+        <div class="img-list">
+        <img src="https://images.unsplash.com/photo-1599561046251-bfb9465b4c44?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1492&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1599423300746-b62533397364?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1599394022918-6c2776530abb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1458&q=80" alt="">
+        <!-- <img src="pexels-creativebin-38994-135940.jpg" alt="">
+        <img src="pexels-philippedonn-1133957.jpg" alt=""> -->
+    </div>
+    <div class="btn-div">
+        <button id="prev">Prev</button>
+        <button id="next">Next</button>
+    </div>
+</div>
+
+<script>
+    let images = document.querySelectorAll(".img-list img");
+    let index =0;
+    let totalLength = images.length;
+    let prevBtn = document.getElementById("prev");
+    let nextBtn = document.getElementById("next");
+
+    function moveSlide(n){
+       index = (index + n + totalLength)%totalLength;
+       scrollSlide();
+    }
+
+    function scrollSlide(){
+        images.forEach((image)=>{
+            image.style.display = "none";
+     } )
+        images[index].style.display = "block";
+    }
+
+    setInterval(()=>moveSlide(1),2000);
+
+    prevBtn.addEventListener("click", ()=>{
+        moveSlide(-1);
+    })
+    nextBtn.addEventListener("click", ()=>{
+        moveSlide(1);
+    })
+</script>
+</body>
+</html>

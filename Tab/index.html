@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="tab-1" class="tab">Tab 1</button>
+<button id="tab-2" class="tab">Tab 2</button>
+<button id="tab-3" class="tab">Tab 3</button>
+
+<div id="content">Content-1</div>
+<div id="about">This content is of tab 1</div>
+    <script>
+      let tabs = document.querySelectorAll(".tab");
+let tabContent = document.getElementById("content");
+let about = document.getElementById("about");
+
+function updateContent(tabNumber) {
+    tabContent.textContent = `Content-${tabNumber}`;
+    about.textContent = `This content is of tab ${tabNumber}`;
+}
+
+tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => updateContent(index + 1));
+});
+    </script>
+</body>
+</html>

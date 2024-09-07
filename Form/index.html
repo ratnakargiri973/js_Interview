@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="name">Name:</label>
+    <input type="text" id="name">
+    <label for="email">Email:</label>
+    <input type="email" id="Email">
+    <label for="phone">Phone:</label>
+    <input type="number" id="phone" minlength="10">
+    <label for="city">City:</label>
+    <input type="text" id="city">
+    <button id="submit">Submit</button>
+    <ul id="contactList"></ul>
+
+    <script>
+        let submit = document.getElementById("submit");
+        let contactList = document.getElementById("contactList");
+       
+        function addInfo(){
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("Email").value;
+            let phone = document.getElementById("phone").value;
+            let city = document.getElementById("city").value;
+
+            let contact = {name, email, phone, city};
+            let contacts = JSON.parse(localStorage.getItem("Contacts")) || [];
+            contacts.push(contact);
+            localStorage.setItem("Contacts", JSON.stringify(contacts));
+            displayContact();
+
+            // Clear the input fields
+            document.getElementById("name").value = "";
+            document.getElementById("Email").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("city").value = "";
+        }
+
+        function displayContact(){
+            contactList.innerHTML = "";
+            let contacts = JSON.parse(localStorage.getItem("Contacts")) || [];
+            contacts.map((contact) => {
+                const li = document.createElement("li");
+                li.textContent = `${contact.name} - ${contact.email} - ${contact.phone} - ${contact.city}`;
+                contactList.appendChild(li);
+            });
+        }
+
+        submit.addEventListener("click", addInfo);
+        displayContact();
+    </script>
+</body>
+</html>
